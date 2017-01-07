@@ -2,7 +2,6 @@
 #include <cassert>
 #include "number.h"
 
-#define PROFILE 1
 
 inline
 bool is_mersenne_prime(const int exponent) noexcept {
