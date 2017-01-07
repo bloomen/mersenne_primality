@@ -13,8 +13,8 @@ bool is_mersenne_prime(const int exponent) noexcept {
   std::chrono::microseconds mod{};
 #endif
   assert(exponent > 2);
-  const auto mersenne = number{exponent + 1} - 1;
-  auto residue = number{3};
+  const auto mersenne = number{exponent} - 1;
+  auto residue = number{2};
   for (int i = 0; i < exponent - 2; ++i) {
 #if PROFILE == 1
     const auto s1 = std::chrono::high_resolution_clock::now();

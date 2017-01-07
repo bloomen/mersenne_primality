@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <gmpxx.h>
 #include "modulo_mersenne.h"
+#include "karatsuba.h"
 
 
 class number {
@@ -9,12 +10,8 @@ public:
 
   explicit
   number(const int exponent) noexcept
-  : num_(0)
   {
-    if (exponent > 0) {
-      const auto value = "1" + std::string(exponent - 1, '0');
-      num_ = mpz_class(value, 2);
-    }
+    mpz_ui_pow_ui(num_.get_mpz_t(), 2, exponent);
   }
 
   bool operator==(const number& other) const noexcept {
@@ -34,7 +31,8 @@ public:
   }
 
   void square() noexcept {
-    num_ *= num_;
+//    num_ *= num_;
+    num_ = karatsuba_square(num_);
   }
 
   void mod_mersenne(const number& mersenne, const int exponent) noexcept {
