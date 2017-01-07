@@ -9,21 +9,12 @@ class number {
 public:
 
   explicit
-  number(const int exponent) noexcept
-  {
+  number(const int exponent) noexcept {
     mpz_ui_pow_ui(num_.get_mpz_t(), 2, exponent);
-  }
-
-  bool operator==(const number& other) const noexcept {
-    return num_ == other.num_;
   }
 
   bool operator==(const int value) const noexcept {
     return num_ == value;
-  }
-
-  number operator-(const int value) const noexcept {
-    return number{num_ - value};
   }
 
   void operator-=(const int value) noexcept {
@@ -31,8 +22,7 @@ public:
   }
 
   void square() noexcept {
-//    num_ *= num_;
-    num_ = karatsuba_square(num_);
+    num_ *= num_;
   }
 
   void mod_mersenne(const number& mersenne, const int exponent) noexcept {
@@ -40,11 +30,6 @@ public:
   }
 
 private:
-
-  explicit
-  number(mpz_class num) noexcept
-  : num_(std::move(num))
-  {}
 
   mpz_class num_;
 };
