@@ -1,6 +1,4 @@
-/.settings
-.project
-.cproject
 *~
-/Debug
-/Release
+.*
+/build
+CMakeLists.txt.user

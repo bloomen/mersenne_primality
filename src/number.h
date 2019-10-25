@@ -2,34 +2,37 @@
 #include <cstddef>
 #include <gmpxx.h>
 #include "modulo_mersenne.h"
-#include "karatsuba.h"
 
 
-class number {
+class number
+{
 public:
 
-  explicit
-  number(const int exponent) noexcept {
-    mpz_ui_pow_ui(num_.get_mpz_t(), 2, exponent);
-  }
+    explicit number(const int exponent) noexcept
+    {
+        mpz_ui_pow_ui(num_.get_mpz_t(), 2, exponent);
+    }
 
-  bool operator==(const int value) const noexcept {
-    return num_ == value;
-  }
+    bool operator==(const int value) const noexcept
+    {
+        return num_ == value;
+    }
 
-  void operator-=(const int value) noexcept {
-    num_ -= value;
-  }
+    void operator-=(const int value) noexcept
+    {
+        num_ -= value;
+    }
 
-  void square() noexcept {
-    num_ *= num_;
-  }
+    void square() noexcept
+    {
+        num_ *= num_;
+    }
 
-  void mod_mersenne(const number& mersenne, const int exponent) noexcept {
-    modulo_mersenne(num_, mersenne.num_, exponent);
-  }
+    void mod_mersenne(const number& mersenne, const int exponent) noexcept
+    {
+        modulo_mersenne(num_, mersenne.num_, exponent);
+    }
 
 private:
-
-  mpz_class num_;
+    mpz_class num_;
 };
